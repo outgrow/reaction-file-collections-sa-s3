@@ -1,3 +1,3 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _debug = require("debug");var _debug2 = _interopRequireDefault(_debug);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _debug = _interopRequireDefault(require("debug"));var _default =
 
-(0, _debug2.default)("reaction-file-collections");
+(0, _debug.default)("reaction-file-collections");exports.default = _default;

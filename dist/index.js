@@ -1,3 +1,3 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _S3Store = require("./S3Store");var _S3Store2 = _interopRequireDefault(_S3Store);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _S3Store = _interopRequireDefault(require("./S3Store"));var _default =
 
-_S3Store2.default;
+_S3Store.default;exports.default = _default;
