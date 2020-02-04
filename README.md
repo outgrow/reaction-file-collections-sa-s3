@@ -1,8 +1,8 @@
 # reaction-file-collections-sa-s3
 
-An AWS S3 adapter for reaction-file-collections, brought to you by out:grow.
+[![npm (scoped)](https://img.shields.io/npm/v/@outgrowio/reaction-file-collections-sa-s3.svg)](https://www.npmjs.com/package/@outgrowio/reaction-file-collections-sa-s3)
 
-[Read the reaction-file-collections docs](https://github.com/reactioncommerce/reaction-file-collections)
+An AWS S3 adapter for [reaction-file-collections](https://github.com/reactioncommerce/reaction-file-collections), brought to you by out:grow.
 
 ## Installation
 
@@ -62,4 +62,3 @@ Whether it is just a one-hour consultation to get you set up or helping your tea
 ## Contributing
 
 Pull Requests, Issues and Feature Requests are welcome!
-
