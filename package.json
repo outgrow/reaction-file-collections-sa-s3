@@ -1,6 +1,6 @@
 {
   "name": "reaction-file-collections-sa-s3",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "An S3 storage adapter for Reaction Commerce's reaction-file-collections, brought to you by out:grow",
   "author": "out:grow",
   "license": "MIT",
@@ -23,11 +23,14 @@
       "@babel/plugin-proposal-class-properties"
     ],
     "presets": [
-      ["@babel/env", {
-        "targets": {
-          "node": "12"
+      [
+        "@babel/env",
+        {
+          "targets": {
+            "node": "12"
+          }
         }
-      }]
+      ]
     ],
     "sourceMaps": true,
     "retainLines": true
