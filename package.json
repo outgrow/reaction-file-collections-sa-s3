@@ -1,6 +1,6 @@
 {
   "name": "@outgrowio/reaction-file-collections-sa-s3",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An S3 storage adapter for Reaction Commerce's reaction-file-collections, brought to you by out:grow",
   "author": "out:grow",
   "license": "MIT",
