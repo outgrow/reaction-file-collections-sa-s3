@@ -19,9 +19,22 @@ export default class S3Store extends StorageAdapter {
       transformWrite
     });
 
+    const s3Params = {};
+
+    if (process.env.AWS_S3_REGION) {
+      debug("AWS_S3_REGION:", process.env.AWS_S3_REGION);
+      s3Params.region = process.env.AWS_S3_REGION;
+    }
+
+    if (process.env.AWS_S3_ENDPOINT) {
+      debug("AWS_S3_ENDPOINT:", process.env.AWS_S3_ENDPOINT);
+      s3Params.endpoint = process.env.AWS_S3_ENDPOINT;
+      s3Params.s3ForcePathStyle = true;
+    }
+
     this.s3 = new S3({
       apiVersion: "2006-03-01",
-      region: process.env.AWS_S3_REGION
+      ...s3Params
     });
 
     this.collectionName = `${collectionPrefix}${name}`.trim();
@@ -30,7 +43,7 @@ export default class S3Store extends StorageAdapter {
 
   _fileKeyMaker(fileRecord) {
     const info = fileRecord.infoForCopy(this.name);
-    
+
     debug("S3Store _fileKeyMaker fileRecord info:", info);
     debug("S3Store _fileKeyMaker fileRecord size:", fileRecord.size());
 
