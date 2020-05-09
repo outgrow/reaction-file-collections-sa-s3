@@ -17,8 +17,11 @@ npm install @outgrowio/reaction-file-collections-sa-s3
 Set up your AWS S3 credentials using environment variables:
 
 ```bash
-# The AWS region your S3 bucket is in
+# The AWS region your S3 bucket is in (if using S3 on AWS)
 AWS_S3_REGION=us-east-1
+
+# The custom S3 endpoint you'd like to use (if using an S3-compatible API like Min.io)
+AWS_S3_ENDPOINT=http://some.endpoint.com:9000
 
 # Name of the S3 bucket you want to store your media in
 AWS_S3_BUCKET=reaction-media
