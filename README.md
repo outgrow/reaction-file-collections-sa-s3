@@ -17,6 +17,10 @@ npm install @outgrowio/reaction-file-collections-sa-s3
 Set up your AWS S3 credentials using environment variables:
 
 ```bash
+
+# The CDN or S3 endpoint to download files.
+CDN_ENDPOINT=http://some.endpoint.com
+
 # The AWS region your S3 bucket is in (if using S3 on AWS)
 AWS_S3_REGION=us-east-1
 
