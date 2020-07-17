@@ -8,6 +8,7 @@ export default class S3Store extends StorageAdapter {
     collectionPrefix = "fc_sa_s3.",
     fileKeyMaker,
     name,
+    isPublic,
     objectACL,
     transformRead,
     transformWrite
@@ -32,6 +33,11 @@ export default class S3Store extends StorageAdapter {
       s3Params.s3ForcePathStyle = true;
     }
 
+    if (process.env.CDN_ENDPOINT) {
+      debug("CDN_ENDPOINT:", process.env.CDN_ENDPOINT);
+    }
+
+
     this.s3 = new S3({
       apiVersion: "2006-03-01",
       ...s3Params
@@ -39,6 +45,8 @@ export default class S3Store extends StorageAdapter {
 
     this.collectionName = `${collectionPrefix}${name}`.trim();
     this.objectACL = objectACL;
+
+    this.isPublic = isPublic;
   }
 
   _fileKeyMaker(fileRecord) {
@@ -50,7 +58,9 @@ export default class S3Store extends StorageAdapter {
     const result = {
       _id: info.key || fileRecord._id,
       filename: info.name || fileRecord.name() || `${fileRecord.collectionName}-${fileRecord._id}`,
-      size: info.size || fileRecord.size()
+      size: info.size || fileRecord.size(),
+      // I want to separate assets by shopId
+      shopId: fileRecord.metadata.shopId
     };
 
     debug("S3Store _fileKeyMaker result:", result);
@@ -107,15 +117,23 @@ export default class S3Store extends StorageAdapter {
   }
 
   async _getWriteStream(fileKey, options = {}) {
+
+    // it's pretty usefull separate assets by shop. My only concern is that we are using shopId without opaque it.
+    const key = `${fileKey.shopId}/${Date.now()}-${fileKey.filename}`;
+
+    // set externalUrl if the bucket is public
+    const externalUrl = this.isPublic ? `${process.env.CDN_ENDPOINT}/${key}` : null;
+
     const opts = {
       Bucket: process.env.AWS_S3_BUCKET,
-      Key: `${Date.now()}-${fileKey.filename}`
+      Key: key
     };
 
     debug("S3Store _getWriteStream opts:", opts);
     debug("S3Store _getWriteStream options:", options);
     debug("S3Store _getWriteStream fileKey:", fileKey);
     debug("S3Store _getWriteStream objectACL", this.objectACL);
+    debug("S3Store _getWriteStream externalUrl", externalUrl);
 
     let uploadId = "";
 
@@ -180,7 +198,8 @@ export default class S3Store extends StorageAdapter {
         // reading, writing, or deleting.
         fileKey: uploadedFile.Key,
         storedAt: new Date(),
-        size: totalFileSize
+        size: totalFileSize,
+        externalUrl
       });
     });
 

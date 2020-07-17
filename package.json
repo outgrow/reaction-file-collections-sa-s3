@@ -41,9 +41,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@babel/runtime": "^7.8.4",
     "@reactioncommerce/file-collections-sa-base": "^0.1.1",
     "aws-sdk": "^2.610.0",
-    "@babel/runtime": "^7.8.4",
     "debug": "^4.1.1"
   },
   "devDependencies": {
