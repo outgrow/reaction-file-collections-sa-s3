@@ -45,7 +45,6 @@ export default class S3Store extends StorageAdapter {
 
     this.collectionName = `${collectionPrefix}${name}`.trim();
     this.objectACL = objectACL;
-
     this.isPublic = isPublic;
   }
 
