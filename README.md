@@ -6,7 +6,7 @@ An AWS S3 adapter for [reaction-file-collections](https://github.com/reactioncom
 
 ## Installation
 
-To use this S3 adapter, you'll need to fork Reaction's `api-plugin-files`. You can clone it to be part of your repository, or fork it separately and use a `git` submodule.
+To use this S3 adapter, you'll need to fork Reaction's [`api-plugin-files`](https://github.com/reactioncommerce/api-plugin-files), which is where the storage adapters are set up. You can clone it to be part of your repository, or fork it separately and use a `git` submodule.
 
 Once you've forked `api-plugin-files`, `cd` to its root directory and install the adapter with `npm install @outgrowio/reaction-file-collections-sa-s3`.
 
