@@ -6,10 +6,25 @@ An AWS S3 adapter for [reaction-file-collections](https://github.com/reactioncom
 
 ## Installation
 
-Open a terminal in your project's `reaction` (API) directory, and install the package from NPM using the following command:
+To use this S3 adapter, you'll need to fork Reaction's `api-plugin-files`. You can clone it to be part of your repository, or fork it separately and use a `git` submodule.
 
-```bash
-npm install @outgrowio/reaction-file-collections-sa-s3
+Once you've forked `api-plugin-files`, `cd` to its root directory and install the adapter with `npm install @outgrowio/reaction-file-collections-sa-s3`.
+
+Then, still in `api-plugin-files`' root directory, open `src/setUpFileCollections.js`.
+
+Replace usages of `GridFSStore` with `S3Store`, starting from the import on line 19: `const S3Store = require("@outgrowio/reaction-file-collections-sa-s3").default;`.
+
+When replacing the `GridFSStore` constructor with the `S3Store` one, make sure to pass the following options:
+
+```javascript
+new S3Store({
+    name, // Should be provided within buildGFS
+    isPublic: true,
+    objectACL: "public-read",
+    async transformWrite(fileRecord) {
+        // Either write your custom transformation code here, or re-use the one from the GridFSStore constructor
+    }
+});
 ```
 
 ## Configuration
@@ -31,25 +46,6 @@ AWS_ACCESS_KEY_ID=QWERTYUIOPASDFGH
 
 # The secret access key that goes with the access key
 AWS_SECRET_ACCESS_KEY=<secret_key>
-```
-
-## Usage
-
-In your project's `reaction` (API) directory, open `/src/core-services/files/setUpFileCollections.js`.
-
-Replace usages of `GridFSStore` with `S3Store`, starting from the import on line 19: `const S3Store = require("@outgrowio/reaction-file-collections-sa-s3").default;`.
-
-When replacing the `GridFSStore` constructor with the `S3Store` one, make sure to pass the following options:
-
-```javascript
-new S3Store({
-    name, // Should be provided within buildGFS
-    isPublic: true,
-    objectACL: "public-read",
-    async transformWrite(fileRecord) {
-        // Either write your custom transformation code here, or re-use the one from the GridFSStore constructor
-    }
-});
 ```
 
 ## Help
