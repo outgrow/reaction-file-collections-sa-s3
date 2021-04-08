@@ -19,8 +19,7 @@ When replacing the `GridFSStore` constructor with the `S3Store` one, make sure t
 ```javascript
 new S3Store({
     name, // Should be provided within buildGFS
-    isPublic: true,
-    objectACL: "public-read",
+    objectACL: "public-read", // You may not pass this property if you wish to do so
     async transformWrite(fileRecord) {
         // Either write your custom transformation code here, or re-use the one from the GridFSStore constructor
     }
