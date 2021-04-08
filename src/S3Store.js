@@ -32,6 +32,16 @@ export default class S3Store extends StorageAdapter {
       s3Params.s3ForcePathStyle = true;
     }
 
+    if (process.env.AWS_ACCESS_KEY_ID) {
+      debug("AWS_ACCESS_KEY_ID:", process.env.AWS_ACCESS_KEY_ID)
+      s3Params.accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+    }
+
+    if (process.env.AWS_SECRET_ACCESS_KEY) {
+      debug("AWS_SECRET_ACCESS_KEY:", process.env.AWS_SECRET_ACCESS_KEY)
+      s3Params.secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+    }
+
     this.s3 = new S3({
       apiVersion: "2006-03-01",
       ...s3Params
@@ -121,7 +131,7 @@ export default class S3Store extends StorageAdapter {
 
     const uploadData = await this.s3.createMultipartUpload({
       ...opts,
-      ACL: this.objectACL
+      ...(this.objectACL ? { ACL: this.objectACL } : {})
     }).promise();
 
     debug("s3.createMultipartUpload data:", uploadData);
