@@ -1,1 +1,3 @@
 *.swo
+
+node_modules/
